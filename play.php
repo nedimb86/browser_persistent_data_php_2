@@ -1,7 +1,15 @@
 <?php
+session_start();
+
 $total = 5;
 $page = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_NUMBER_INT);
+
+if(isset($_POST['word'])) {
+    $_SESSION['word'][$page-1] = filter_input(INPUT_POST, 'word', FILTER_SANITIZE_STRING);
+}
+
 if(empty($page)) {
+    session_destroy();
     $page = 1;
 }
 
